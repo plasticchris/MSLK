@@ -16,7 +16,7 @@
 #include <c10/hip/HIPStream.h>
 
 #ifdef HIPIFY_V2
-#define getCurrentHIPStream getCurrentCUDAStream
+#define getCurrentCUDAStream getCurrentCUDAStream
 #endif
 #
 #include <atomic>
@@ -140,7 +140,7 @@ at::Tensor fused_moe_impl(
       static_cast<int>(stride)};
 
   // Call kernel with default stream config
-  auto stream = at::cuda::getCurrentHIPStream().stream();
+  auto stream = at::cuda::getCurrentCUDAStream().stream();
   ck_tile::stream_config stream_cfg{stream};
   fused_moe(traits, args, stream_cfg);
 
