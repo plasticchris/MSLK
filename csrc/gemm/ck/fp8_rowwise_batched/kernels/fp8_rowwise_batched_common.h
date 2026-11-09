@@ -10,7 +10,7 @@
 #include <c10/hip/HIPStream.h>
 
 #ifdef HIPIFY_V2
-#define getCurrentHIPStream getCurrentCUDAStream
+#define getCurrentCUDAStream getCurrentCUDAStream
 #endif
 
 #include "ck/ck.hpp"
@@ -176,7 +176,7 @@ at::Tensor f8f8bf16_rowwise_batched_impl(
       b_element_op,
       cde_element_op);
 
-  auto stream = at::cuda::getCurrentHIPStream().stream();
+  auto stream = at::cuda::getCurrentCUDAStream().stream();
   invoker.Run(argument, StreamConfig{stream, false});
 
   return Y;
